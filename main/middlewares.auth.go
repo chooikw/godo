@@ -9,11 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserClaims struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-}
-
 func setUserMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
@@ -36,11 +31,11 @@ func setUserMiddleware() gin.HandlerFunc {
 
 		// Set the user information from the token into the context
 		claims, _ := token.Claims.(jwt.MapClaims)
-		userId, _ := claims["user"].(map[string]interface{})["id"].(float64)
+		userId, _ := claims["user"].(map[string]interface{})["id"].(string)
 		userName, _ := claims["user"].(map[string]interface{})["name"].(string)
 
-		user := UserClaims{
-			Id:   int(userId),
+		user := User{
+			Id:   userId,
 			Name: userName,
 		}
 		c.Set("user", user)

@@ -28,7 +28,7 @@ func logUserReqMiddleware() gin.HandlerFunc {
 			bodyString = fmt.Sprintf(" Req Body: %v", string(body))
 		}
 
-		fmt.Printf("[Req] User #%v%v\n", user.(UserClaims).Id, bodyString)
+		fmt.Printf("[Req] User #%v%v\n", user.(User).Id, bodyString)
 
 		c.Next()
 	}
