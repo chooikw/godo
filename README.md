@@ -24,9 +24,7 @@ This application utilizes following frameworks:
 
 ## Installing
 
-1. Build the docker file ```docker build -t godo .```
-2. Copy the .env.sample into .env , adjust the environment variables accordingly
-
+1. Copy the .env.sample into .env, remove all comments and adjust the environment variables accordingly
   
   
 

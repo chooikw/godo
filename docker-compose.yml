@@ -11,9 +11,14 @@ services:
       - "3306:3306"
     volumes:
       - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
 
   godo:
-    image: godo:latest
+    image: chooikw/godo:latest
     environment:
       JWT_SECRET: "${JWT_SECRET}"
       DB_CLIENT: "${DB_CLIENT}"
@@ -23,6 +28,7 @@ services:
     ports:
       - "${PORT}:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 volumes:
   mysqldata:
