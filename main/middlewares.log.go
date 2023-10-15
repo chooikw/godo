@@ -3,6 +3,7 @@ package main
 
 import (
 	"bytes"
+	"godo/authservice"
 
 	"fmt"
 
@@ -28,7 +29,7 @@ func logUserReqMiddleware() gin.HandlerFunc {
 			bodyString = fmt.Sprintf(" Req Body: %v", string(body))
 		}
 
-		fmt.Printf("[Req] User #%v%v\n", user.(User).Id, bodyString)
+		fmt.Printf("[Req] User #%v%v\n", user.(authservice.User).Id, bodyString)
 
 		c.Next()
 	}

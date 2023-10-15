@@ -2,6 +2,7 @@
 package main
 
 import (
+	"godo/authservice"
 	"os"
 
 	"github.com/dgrijalva/jwt-go"
@@ -34,7 +35,7 @@ func setUserMiddleware() gin.HandlerFunc {
 		userId, _ := claims["user"].(map[string]interface{})["id"].(string)
 		userName, _ := claims["user"].(map[string]interface{})["name"].(string)
 
-		user := User{
+		user := authservice.User{
 			Id:   userId,
 			Name: userName,
 		}

@@ -16,6 +16,7 @@ var router *gin.Engine
 
 func main() {
 	// Init db
+	fmt.Println(os.Getenv("DB_CONN"), os.Getenv("DB_CLIENT"))
 	db, err := gorm.Open(os.Getenv("DB_CLIENT"), os.Getenv("DB_CONN"))
 	if err != nil {
 		panic("Failed to connect to database")

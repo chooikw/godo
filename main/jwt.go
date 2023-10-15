@@ -5,17 +5,19 @@ import (
 	"os"
 	"time"
 
+	"godo/authservice"
+
 	"github.com/dgrijalva/jwt-go"
 )
 
 var jwtSecret = []byte(os.Getenv("JWT_SECRET"))
 
 type Claims struct {
-	User User `json:"user"`
+	User authservice.User `json:"user"`
 	jwt.StandardClaims
 }
 
-func generateJWTForUser(user User) (string, error) {
+func generateJWTTokenForUser(user authservice.User) (string, error) {
 	claims := Claims{
 		User: user,
 		StandardClaims: jwt.StandardClaims{
