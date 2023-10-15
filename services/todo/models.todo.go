@@ -3,7 +3,7 @@ package todoservice
 import "time"
 
 type Todo struct {
-	ID        uint      `json:"id" gorm:"primary_key;auto_increment"`
+	Id        uint      `json:"id" gorm:"primary_key;auto_increment"`
 	Title     string    `json:"title" binding:"required"`
 	Completed bool      `json:"completed"`
 	UserId    string    `json:"userId" gorm:"index"`
