@@ -1,10 +1,11 @@
-// This is a helper to function to generate sample JWT token
+// This is a helper to function to generate JWT token
 package main
 
 import (
-	"fmt"
 	"os"
 	"time"
+
+	"godo/authservice"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -12,18 +13,16 @@ import (
 var jwtSecret = []byte(os.Getenv("JWT_SECRET"))
 
 type Claims struct {
-	User map[string]interface{} `json:"user"`
+	User authservice.User `json:"user"`
 	jwt.StandardClaims
 }
 
-func generateJWT() (string, error) {
+func generateJWTTokenForUser(user authservice.User) (string, error) {
 	claims := Claims{
-		User: map[string]interface{}{
-			"id":   1,
-			"name": "John",
-		},
+		User: user,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().AddDate(1, 0, 0).Unix(), // Token expires in 1 year
+			Subject:   user.Id,
 		},
 	}
 
@@ -33,14 +32,4 @@ func generateJWT() (string, error) {
 		return "", err
 	}
 	return signedToken, nil
-}
-
-func main() {
-	token, err := generateJWT()
-	if err != nil {
-		fmt.Println("Failed to generate token:", err)
-		return
-	}
-	fmt.Println("Generated JWT Token:")
-	fmt.Println(token)
 }

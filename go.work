@@ -2,5 +2,6 @@ go 1.21.3
 
 use (
 	./main
+	./services/auth
 	./services/todo
 )
