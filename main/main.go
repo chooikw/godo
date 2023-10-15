@@ -8,6 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+
+	"godo/todoservice"
 )
 
 var router *gin.Engine
@@ -16,11 +18,13 @@ func main() {
 	// Init db
 	db, err := gorm.Open(os.Getenv("DB_CLIENT"), os.Getenv("DB_CONN"))
 	if err != nil {
-		fmt.Println("Failed to connect to database")
-		return
+		panic("Failed to connect to database")
 	}
 	defer db.Close()
 	fmt.Println("DB connected")
+
+	// Init services
+	todoservice.Init(db)
 
 	// Init web server
 	router = gin.Default()
