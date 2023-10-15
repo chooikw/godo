@@ -1,11 +1,15 @@
 // Define all the routes here
 package main
 
-func initRoutes() {
-	//router.Use(setUserStatus())
+import "github.com/gin-gonic/gin"
 
+func initRoutes() {
 	todoRoutes := router.Group("/todos")
 	{
+		todoRoutes.Use(func(c *gin.Context) {
+			c.Header("Content-Type", "application/json")
+			c.Next()
+		})
 		todoRoutes.Use(setUserMiddleware())
 		todoRoutes.Use(logUserReqMiddleware())
 		todoRoutes.GET("/", findTodos)
