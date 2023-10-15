@@ -9,12 +9,18 @@ services:
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     ports:
       - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
 
   godo:
     image: godo:latest
     environment:
       JWT_SECRET: "${JWT_SECRET}"
+      DB_CLIENT: "${DB_CLIENT}"
+      DB_CONN: "${DB_CONN}"
     ports:
       - "${PORT}:8080"
     depends_on:
       - mysql
+volumes:
+  mysqldata:
