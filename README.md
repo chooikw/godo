@@ -172,11 +172,11 @@ The TODO web service will listen at `http://localhost:8080`
 
 
 ## Testing
-
-  
-
-  
-
+We are testing the Todo module only
+```
+cd services/todo
+go test
+```
   
 
 ## Modules
