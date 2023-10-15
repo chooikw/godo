@@ -1,3 +1,4 @@
+// Middleware to log user's requests
 package main
 
 import (
@@ -11,7 +12,6 @@ import (
 )
 
 func logUserReqMiddleware() gin.HandlerFunc {
-	// Logs user's requests
 	return func(c *gin.Context) {
 
 		var bodyString string

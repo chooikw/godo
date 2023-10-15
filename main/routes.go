@@ -1,3 +1,4 @@
+// Define all the routes here
 package main
 
 func initRoutes() {

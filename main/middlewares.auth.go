@@ -1,3 +1,4 @@
+// Middleware to decode the JWT token, and set user from the payload into gin Context
 package main
 
 import (
@@ -14,7 +15,6 @@ type UserClaims struct {
 }
 
 func setUserMiddleware() gin.HandlerFunc {
-	// Decode the JWT token, and set user from the payload into gin Context
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 		if authHeader == "" {
