@@ -18,7 +18,7 @@ services:
       retries: 10
 
   godo:
-    image: godo:latest
+    image: chooikw/godo:latest
     environment:
       JWT_SECRET: "${JWT_SECRET}"
       DB_CLIENT: "${DB_CLIENT}"
